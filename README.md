@@ -1,16 +1,19 @@
-# simple-graph-sharer
+# form-sharer
 
-Editor de gráficos para compartición rápida.
+Editor de formularios para compartición rápida.
 
 ## Aplicación online
 
 Accede a la aplicación aquí:
 
-- [https://allnulled.github.io/simple-graph-sharer/index.html](https://allnulled.github.io/simple-graph-sharer/index.html)
+- [https://allnulled.github.io/form-sharer/index.html](https://allnulled.github.io/form-sharer/index.html)
 
-## Documentación
+## Funcionamiento
 
-- API en:
-   - [https://observablehq.com/plot/getting-started](https://observablehq.com/plot/getting-started)
-- Ejemplos en:
-   - [https://observablehq.com/@observablehq/plot-gallery](https://observablehq.com/@observablehq/plot-gallery)
+La aplicación tiene varias interfaces con las que puedes modelar y cumplimentar formularios.
+
+Finalmente, en la barra de arriba, aparecen los exportadores: botones que te graban el estado del formulario en una URL.
+
+La exportación primera es del formulario vacío.
+
+La exportación segunda es del formulario rellenado.
