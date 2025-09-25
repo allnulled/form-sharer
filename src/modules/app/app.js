@@ -16,55 +16,11 @@
         isMounted: false,
         selectedPage: "editor", // also: "editor", "formulario", "respuestas"
         selectedEditorSubpage: "constructor", // also: "codigo", "constructor"
-        formulario: [{
-          id: "",
-          tipo: "interludio",
-          interludio: "# Sección 1\n\nExplicación de sección 1.\n\n![agua](https://www.fundacionaquae.org/wp-content/uploads/2020/02/propiedades-agua.jpg)",
-        }, {
-          id: "nombre del usuario",
-          tipo: "texto",
-          pregunta: "¿Cómo te llamas?",
-          relleno: "Pepito de los Palotes",
-          descripcion: "El nombre del usuario",
-          requerido: true,
-        }, {
-          id: "descripcion del usuario",
-          tipo: "párrafo",
-          pregunta: "¿Cómo te describes?",
-          relleno: "Soy tal, cual, pascual.",
-          descripcion: "La descripción del usuario",
-          requerido: true,
-        }, {
-          id: "edad del usuario",
-          tipo: "número",
-          pregunta: "¿Cuántos años tienes?",
-          relleno: "34",
-          descripcion: "La edad del usuario",
-          requerido: true,
-        }, {
-          id: "fecha de alta del usuario en tal plataforma",
-          tipo: "fecha",
-          pregunta: "¿Cuándo te diste de alta en tal plataforma?",
-          relleno: "2025/01/01",
-          descripcion: "La fecha de alta del usuario",
-          requerido: true,
-        }, {
-          id: "duración del estado tal",
-          tipo: "duración",
-          pregunta: "¿Cuánto te duró el estado tal?",
-          relleno: "2h 30min",
-          descripcion: "La duración del estado del usuario",
-          requerido: true,
-        }] || [],
+        formulario: [],
         codigo_de_formulario: "",
         campos_escondidos: [],
         descripciones_desplegadas: [],
-        respuestas: {
-          "nombre del usuario": "Carlos",
-          "descripcion del usuario": "Soy una persona",
-          "edad del usuario": "34",
-
-        } || {},
+        respuestas: {},
       };
     },
     methods: {
