@@ -1,5 +1,6 @@
 LswLifecycle.hooks.register("app:application_deployed", "startJobs:org.allnulled.lsw-conductometria", async function () {
   Setup_intruder_jobs: {
+    break Setup_intruder_jobs;
     // RUTINER A LOS 2:20-3 MINUTOS DE ENTRAR, MENSAJE:
     let duracionDeIntervalos = undefined;
     try {
@@ -9,6 +10,7 @@ LswLifecycle.hooks.register("app:application_deployed", "startJobs:org.allnulled
       Vue.prototype.$lsw.toasts.showError(error);
       duracionDeIntervalos = LswTimer.utils.fromDurationstringToMilliseconds("2min");
     }
+    
     Vue.prototype.$lsw.intruder.addJob({
       id: "Job para memorizar Rutiner",
       timeout: duracionDeIntervalos,
