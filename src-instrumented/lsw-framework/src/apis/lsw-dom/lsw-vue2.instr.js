@@ -1,10 +1,10 @@
-function cov_jhukddxk() {
-    var path = "/home/carlos/Escritorio/formulario-de-digitalizacion/src/lsw-framework/src/apis/lsw-dom/lsw-vue2.js";
-    var hash = "9003614cc168a6f92c2fd6dc92be472b0ab00fe8";
+function cov_1nstxqzjt6() {
+    var path = "/home/carlos/Escritorio/form-sharer/src/lsw-framework/src/apis/lsw-dom/lsw-vue2.js";
+    var hash = "42758e826fa071e2acc653e0de7e3c5f37b6e5ae";
     var global = new Function("return this")();
     var gcv = "__coverage__";
     var coverageData = {
-        path: "/home/carlos/Escritorio/formulario-de-digitalizacion/src/lsw-framework/src/apis/lsw-dom/lsw-vue2.js",
+        path: "/home/carlos/Escritorio/form-sharer/src/lsw-framework/src/apis/lsw-dom/lsw-vue2.js",
         statementMap: {
             "0": {
                 start: {
@@ -690,7 +690,7 @@ function cov_jhukddxk() {
             "8": [0, 0]
         },
         _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-        hash: "9003614cc168a6f92c2fd6dc92be472b0ab00fe8"
+        hash: "42758e826fa071e2acc653e0de7e3c5f37b6e5ae"
     };
     var coverage = global[gcv] || (global[gcv] = {});
     if (!coverage[path] || coverage[path].hash !== hash) {
@@ -698,44 +698,44 @@ function cov_jhukddxk() {
     }
     var actualCoverage = coverage[path];
     { // @ts-ignore
-        cov_jhukddxk = function() {
+        cov_1nstxqzjt6 = function() {
             return actualCoverage;
         };
     }
     return actualCoverage;
 }
-cov_jhukddxk();
-cov_jhukddxk().s[0]++;
+cov_1nstxqzjt6();
+cov_1nstxqzjt6().s[0]++;
 (function(factory) {
-    cov_jhukddxk().f[0]++;
-    const mod = (cov_jhukddxk().s[1]++, factory());
-    cov_jhukddxk().s[2]++;
+    cov_1nstxqzjt6().f[0]++;
+    const mod = (cov_1nstxqzjt6().s[1]++, factory());
+    cov_1nstxqzjt6().s[2]++;
     if (typeof window !== 'undefined') {
-        cov_jhukddxk().b[0][0]++;
-        cov_jhukddxk().s[3]++;
+        cov_1nstxqzjt6().b[0][0]++;
+        cov_1nstxqzjt6().s[3]++;
         window['LswVue2'] = mod;
     } else {
-        cov_jhukddxk().b[0][1]++;
+        cov_1nstxqzjt6().b[0][1]++;
     }
-    cov_jhukddxk().s[4]++;
+    cov_1nstxqzjt6().s[4]++;
     if (typeof global !== 'undefined') {
-        cov_jhukddxk().b[1][0]++;
-        cov_jhukddxk().s[5]++;
+        cov_1nstxqzjt6().b[1][0]++;
+        cov_1nstxqzjt6().s[5]++;
         global['LswVue2'] = mod;
     } else {
-        cov_jhukddxk().b[1][1]++;
+        cov_1nstxqzjt6().b[1][1]++;
     }
-    cov_jhukddxk().s[6]++;
+    cov_1nstxqzjt6().s[6]++;
     if (typeof module !== 'undefined') {
-        cov_jhukddxk().b[2][0]++;
-        cov_jhukddxk().s[7]++;
+        cov_1nstxqzjt6().b[2][0]++;
+        cov_1nstxqzjt6().s[7]++;
         module.exports = mod;
     } else {
-        cov_jhukddxk().b[2][1]++;
+        cov_1nstxqzjt6().b[2][1]++;
     }
 })(function() {
-    cov_jhukddxk().f[1]++;
-    cov_jhukddxk().s[8]++;
+    cov_1nstxqzjt6().f[1]++;
+    cov_1nstxqzjt6().s[8]++;
     /**
      * 
      * 
@@ -749,44 +749,44 @@ cov_jhukddxk().s[0]++;
      */ // @code.start: LswVue2 class | @section: Lsw Vue2 API » LswVue2 class
     const LswVue2 = class {
         static getClosestParent(component, filterCallback) {
-            cov_jhukddxk().f[2]++;
-            cov_jhukddxk().s[9]++;
+            cov_1nstxqzjt6().f[2]++;
+            cov_1nstxqzjt6().s[9]++;
             $ensure(component).type("object");
-            cov_jhukddxk().s[10]++;
+            cov_1nstxqzjt6().s[10]++;
             $ensure(filterCallback).type("function");
-            let parentOf = (cov_jhukddxk().s[11]++, component);
-            cov_jhukddxk().s[12]++;
+            let parentOf = (cov_1nstxqzjt6().s[11]++, component);
+            cov_1nstxqzjt6().s[12]++;
             do {
-                cov_jhukddxk().s[13]++;
+                cov_1nstxqzjt6().s[13]++;
                 parentOf = parentOf.$parent;
-                const isValid = (cov_jhukddxk().s[14]++, filterCallback(parentOf));
-                cov_jhukddxk().s[15]++;
+                const isValid = (cov_1nstxqzjt6().s[14]++, filterCallback(parentOf));
+                cov_1nstxqzjt6().s[15]++;
                 if (isValid) {
-                    cov_jhukddxk().b[3][0]++;
-                    cov_jhukddxk().s[16]++;
+                    cov_1nstxqzjt6().b[3][0]++;
+                    cov_1nstxqzjt6().s[16]++;
                     return parentOf;
                 } else {
-                    cov_jhukddxk().b[3][1]++;
+                    cov_1nstxqzjt6().b[3][1]++;
                 }
             } while (typeof parentOf !== "undefined");
-            cov_jhukddxk().s[17]++;
+            cov_1nstxqzjt6().s[17]++;
             return undefined;
         }
-        static extendComponent(baseComponent = (cov_jhukddxk().b[4][0]++, {})) {
-            cov_jhukddxk().f[3]++;
-            const extendedComponent = (cov_jhukddxk().s[18]++, Object.assign({}, baseComponent));
-            cov_jhukddxk().s[19]++;
-            extendedComponent.props = Object.assign({}, (cov_jhukddxk().b[5][0]++, baseComponent.props) || (cov_jhukddxk().b[5][1]++, {}));
-            cov_jhukddxk().s[20]++;
-            extendedComponent.methods = Object.assign({}, (cov_jhukddxk().b[6][0]++, baseComponent.methods) || (cov_jhukddxk().b[6][1]++, {}));
-            cov_jhukddxk().s[21]++;
-            extendedComponent.watch = Object.assign({}, (cov_jhukddxk().b[7][0]++, baseComponent.watch) || (cov_jhukddxk().b[7][1]++, {}));
-            cov_jhukddxk().s[22]++;
-            extendedComponent.computed = Object.assign({}, (cov_jhukddxk().b[8][0]++, baseComponent.computed) || (cov_jhukddxk().b[8][1]++, {}));
-            cov_jhukddxk().s[23]++;
+        static extendComponent(baseComponent = (cov_1nstxqzjt6().b[4][0]++, {})) {
+            cov_1nstxqzjt6().f[3]++;
+            const extendedComponent = (cov_1nstxqzjt6().s[18]++, Object.assign({}, baseComponent));
+            cov_1nstxqzjt6().s[19]++;
+            extendedComponent.props = Object.assign({}, (cov_1nstxqzjt6().b[5][0]++, baseComponent.props) || (cov_1nstxqzjt6().b[5][1]++, {}));
+            cov_1nstxqzjt6().s[20]++;
+            extendedComponent.methods = Object.assign({}, (cov_1nstxqzjt6().b[6][0]++, baseComponent.methods) || (cov_1nstxqzjt6().b[6][1]++, {}));
+            cov_1nstxqzjt6().s[21]++;
+            extendedComponent.watch = Object.assign({}, (cov_1nstxqzjt6().b[7][0]++, baseComponent.watch) || (cov_1nstxqzjt6().b[7][1]++, {}));
+            cov_1nstxqzjt6().s[22]++;
+            extendedComponent.computed = Object.assign({}, (cov_1nstxqzjt6().b[8][0]++, baseComponent.computed) || (cov_1nstxqzjt6().b[8][1]++, {}));
+            cov_1nstxqzjt6().s[23]++;
             return extendedComponent;
         }
     }; // @code.end: LswVue2 class
-    cov_jhukddxk().s[24]++;
+    cov_1nstxqzjt6().s[24]++;
     return LswVue2;
 });

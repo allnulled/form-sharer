@@ -31,14 +31,13 @@
         } else if (page === "formulario") {
           this.ensureAllIdsExistAndAreUnique();
         } else if (page === "respuestas") {
-          // @TODO
+          this.validateCampos();
         }
         this.selectedPage = page;
       },
       toggleCampo(bloqueIndex) {
         this.$trace("App.methods.toggleCampo");
         const pos = this.campos_escondidos.indexOf(bloqueIndex);
-        console.log(pos, this.campos_escondidos)
         if (pos === -1) {
           this.campos_escondidos.push(bloqueIndex);
         } else {
@@ -58,7 +57,6 @@
       },
       setBloqueValue(bloqueIndex, prop, value) {
         this.$trace("App.methods.setBloqueValue");
-        console.log(value);
         this.formulario[bloqueIndex] = Object.assign({}, this.formulario[bloqueIndex], {
           [prop]: value
         });
@@ -73,8 +71,26 @@
           requerido: false,
           tipo: "texto",
           relleno: "",
+          condicional: "if(false) {return false;}\nreturn true",
+          validador: "if(false) throw new Error('Validación no cumplida')",
           interludio: null,
+          opciones: [],
         });
+      },
+      addOpcionBloque(bloqueIndex) {
+        this.$trace("App.methods.addOpcionBloque");
+        this.formulario[bloqueIndex].opciones.push("");
+        this.formulario[bloqueIndex] = Object.assign({}, this.formulario[bloqueIndex]);
+      },
+      changeOpcionBloque(bloqueIndex, opcionIndex, event) {
+        this.$trace("App.methods.changeOpcionBloque");
+        this.formulario[bloqueIndex].opciones[opcionIndex] = event.target.value;
+        this.formulario[bloqueIndex] = Object.assign({}, this.formulario[bloqueIndex]);
+      },
+      removeOpcionBloque(bloqueIndex, opcionIndex) {
+        this.$trace("App.methods.removeOpcionBloque");
+        this.formulario[bloqueIndex].opciones.splice(opcionIndex, 1);
+        this.formulario[bloqueIndex] = Object.assign({}, this.formulario[bloqueIndex]);
       },
       removeBloqueFromFormulario(bloqueIndex) {
         this.$trace("App.methods.removeBloqueFromFormulario");
@@ -106,13 +122,13 @@
               continue Iterating_bloques_de_formulario;
             }
             if (bloque.id.trim() === "") {
-              throw new Error(`Campo nº ${index+1} no tiene identificador propio`);
+              throw new Error(`Campo nº ${index + 1} no tiene identificador propio`);
             }
             const pos = knownIds.map(it => it.id).indexOf(bloque.id);
-            if(pos !== -1) {
-              throw new Error(`Campo nº ${knownIds[pos].index+1} y nº ${index+1} tienen el mismo identificador «${bloque.id}»`);
+            if (pos !== -1) {
+              throw new Error(`Campo nº ${knownIds[pos].index + 1} y nº ${index + 1} tienen el mismo identificador «${bloque.id}»`);
             }
-            knownIds.push({ id: bloque.id, index});
+            knownIds.push({ id: bloque.id, index });
           }
         } catch (error) {
           this.$lsw.toasts.showError(error);
@@ -136,20 +152,59 @@
         const urlCompleta = window.location.origin + window.location.pathname + "?" + query;
         LswUtils.copyToClipboard(urlCompleta);
       },
+      evaluateCondicional(bloque) {
+        this.$trace("App.methods.evaluateCondicional");
+        const callback = LswUtils.createSyncFunction(bloque.condicional, ["respuestas", "formulario", "componente", "formItem"]);
+        return callback.call(this, this.respuestas, this.formulario, this, bloque);
+      },
+      validateCampos() {
+        this.$trace("App.methods.validateCampos");
+        try {
+          Iterating_campos:
+          for (let index = 0; index < this.formulario.length; index++) {
+            const bloque = this.formulario[index];
+            const id = bloque.id;
+            Ignorar_si_no_aparece: {
+              const aparece = this.evaluateCondicional(bloque);
+              if (!aparece) {
+                continue Iterating_campos;
+              }
+            }
+            const value = this.respuestas[id];
+            Validar_si_aparece: {
+              const callback = LswUtils.createSyncFunction(bloque.condicional, ["valor", "respuestas", "formulario", "componente", "formItem"]);
+              const validacion = callback.call(this, value, this.respuestas, this.formulario, this, bloque);
+              if (validacion !== true) {
+                throw validacion;
+              }
+            }
+            Validar_si_se_requiere: {
+              if (bloque.requerido) {
+                if ((typeof value === 'undefined') || (value.trim() === '')) {
+                  throw new Error(`El campo nº ${index + 1} del formulario es obligatorio`);
+                }
+              }
+            }
+          }
+        } catch (error) {
+          this.$lsw.toasts.showError(error);
+          throw error;
+        }
+      },
     },
     async mounted() {
       console.log("[💛] Application mounted.");
-      if(!this.isMounted) {
+      if (!this.isMounted) {
         Inyectar_parametrizacion: {
           const params = new URLSearchParams(window.location.search);
           const formulario = params.get("formulario");
           const respuestas = params.get("respuestas");
           try {
-            if(formulario) {
+            if (formulario) {
               this.formulario = JSON.parse(formulario);
               this.selectPage("formulario");
             }
-            if(respuestas) {
+            if (respuestas) {
               this.respuestas = JSON.parse(respuestas);
               this.selectPage("respuestas");
             }

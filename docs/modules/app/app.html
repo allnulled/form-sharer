@@ -1,14 +1,18 @@
 <div class="app app_component position_relative">
     <lsw-typical-title :buttons="false">
         <div class="flex_row centered">
-            <div class="flex_100">
-                <span class="color_white">📋 Aplicación de formularios</span>
+            <div class="flex_100 pad_vertical_2">
+                <span class="color_white">📋 Form-sharer</span>
             </div>
-            <div class="flex_1 nowrap" v-if="selectedPage === 'formulario'">
-                <button class="supermini" v-on:click="exportarFormularioVacio">📋 ↗️</button>
+            <div class="flex_1 nowrap"
+                v-if="selectedPage === 'formulario'">
+                <button class="supermini"
+                    v-on:click="exportarFormularioVacio">📋 Exportar preguntas ↗️</button>
             </div>
-            <div class="flex_1 nowrap" v-if="selectedPage === 'respuestas'">
-                <button class="supermini" v-on:click="exportarFormularioCumplimentado">✅ ↗️</button>
+            <div class="flex_1 nowrap"
+                v-if="selectedPage === 'respuestas'">
+                <button class="supermini"
+                    v-on:click="exportarFormularioCumplimentado">✅ Exportar respuestas ↗️</button>
             </div>
         </div>
     </lsw-typical-title>
@@ -24,29 +28,37 @@
                 </div>
                 <template v-if="selectedEditorSubpage === 'constructor'">
                     <div class="flex_1 pad_left_1">
-                        <button class="supermini" v-on:click="() => {selectedEditorSubpage = 'json';}">
+                        <button class="supermini"
+                            v-on:click="() => {selectedEditorSubpage = 'json';}">
                             ⬅️ { }
                         </button>
                     </div>
                     <div class="flex_1 pad_left_1">
-                        <button class="supermini" v-on:click="() => selectPage('formulario')">
+                        <button class="supermini"
+                            v-on:click="() => selectPage('formulario')">
                             📋 ➡️
                         </button>
                     </div>
                 </template>
                 <template v-if="selectedEditorSubpage === 'json'">
                     <div class="flex_1 pad_left_1">
-                        <button class="supermini" v-on:click="() => {saveJsonToFormulario(); selectedEditorSubpage = 'constructor';}">
+                        <button class="supermini"
+                            v-on:click="() => {saveJsonToFormulario(); selectedEditorSubpage = 'constructor';}">
                             🔨 ➡️
                         </button>
                     </div>
                 </template>
             </div>
         </lsw-typical-title>
-        <div class="pad_1" v-if="selectedEditorSubpage === 'json'">
-            <textarea ref="editor_de_formulario_en_json" :style="getEditorHeightForStyles()" spellcheck="false" :value="JSON.stringify(formulario, null, 2)"></textarea>
+        <div class="pad_1"
+            v-if="selectedEditorSubpage === 'json'">
+            <textarea ref="editor_de_formulario_en_json"
+                :style="getEditorHeightForStyles()"
+                spellcheck="false"
+                :value="JSON.stringify(formulario, null, 2)"></textarea>
         </div>
-        <div class="pad_1" v-if="selectedEditorSubpage === 'constructor'">
+        <div class="pad_1"
+            v-if="selectedEditorSubpage === 'constructor'">
             <div class="color_white"
                 v-for="bloque, bloqueIndex in formulario"
                 v-bind:key="'bloque_de_formulario_' + bloqueIndex">
@@ -64,56 +76,131 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="metaformulario_de_campo_de" v-show="campos_escondidos.indexOf(bloqueIndex) === -1">
+                        <div class="metaformulario_de_campo_de"
+                            v-show="campos_escondidos.indexOf(bloqueIndex) === -1">
                             <hr />
                             <!--div class="">{{ bloque }}</div-->
                             <div class="pad_top_2">
                                 <div class="pad_bottom_1">❓ Tipo del campo:</div>
-                                <select class="supermini width_100" v-on:change="v => setBloqueValue(bloqueIndex, 'tipo', v.target.value)" :value="bloque.tipo">
+                                <select class="supermini width_100"
+                                    v-on:change="v => setBloqueValue(bloqueIndex, 'tipo', v.target.value)"
+                                    :value="bloque.tipo">
                                     <option value="interludio">Interludio</option>
                                     <option value="texto">Texto</option>
                                     <option value="párrafo">Párrafo</option>
                                     <option value="número">Número</option>
                                     <option value="fecha">Fecha</option>
                                     <option value="duración">Duración</option>
+                                    <option value="opción">Opción única</option>
+                                    <option value="opciones">Opciones múltiples</option>
                                 </select>
                             </div>
                             <hr />
                             <template v-if="bloque.tipo !== 'interludio'">
                                 <div class="pad_top_2">
                                     <div class="pad_bottom_1">❓ Identificador del campo:</div>
-                                    <input class="supermini width_100" type="text"  v-on:input="(v) => setBloqueValue(bloqueIndex, 'id', v.target.value)" placeholder="Ej: nombre_de_usuario" :value="bloque.id" />
+                                    <input class="supermini width_100"
+                                        type="text"
+                                        v-on:input="(v) => setBloqueValue(bloqueIndex, 'id', v.target.value)"
+                                        placeholder="Ej: nombre_de_usuario"
+                                        :value="bloque.id" />
                                 </div>
                                 <hr />
                                 <div class="pad_top_2">
                                     <div class="pad_bottom_1">❓ Pregunta del campo:</div>
-                                    <input class="supermini width_100" type="text"  v-on:input="(v) => setBloqueValue(bloqueIndex, 'pregunta', v.target.value)" placeholder="Ej: ¿Cómo te llamas?" :value="bloque.pregunta" />
+                                    <input class="supermini width_100"
+                                        type="text"
+                                        v-on:input="(v) => setBloqueValue(bloqueIndex, 'pregunta', v.target.value)"
+                                        placeholder="Ej: ¿Cómo te llamas?"
+                                        :value="bloque.pregunta" />
                                 </div>
                                 <hr />
                                 <div class="pad_top_2">
                                     <div class="pad_bottom_1">❓ Descripción del campo:</div>
-                                    <textarea class="supermini" v-on:input="(v) => setBloqueValue(bloqueIndex, 'descripcion', v.target.value)" spellcheck="false" placeholder="Ej: Aquí va el nombre y apellidos del usuario." :value="bloque.descripcion"></textarea>
+                                    <textarea class="supermini"
+                                        v-on:input="(v) => setBloqueValue(bloqueIndex, 'descripcion', v.target.value)"
+                                        spellcheck="false"
+                                        placeholder="Ej: Aquí va el nombre y apellidos del usuario."
+                                        :value="bloque.descripcion"></textarea>
                                 </div>
                                 <hr />
                                 <div class="pad_top_2 cursor_pointer">
                                     <div class="pad_bottom_1">❓ Opcionalidad del campo:</div>
-                                    <div class="" v-on:click="() => setBloqueValue(bloqueIndex, 'requerido', !bloque.requerido)">
+                                    <div class=""
+                                        v-on:click="() => setBloqueValue(bloqueIndex, 'requerido', !bloque.requerido)">
                                         <div v-if="bloque.requerido">✅ Es requerido</div>
                                         <div v-else>🟩 No es requerido</div>
                                     </div>
                                 </div>
+                                <template v-if="['opción', 'opciones'].indexOf(bloque.tipo) !== -1">
+                                    <hr />
+                                    <div>
+                                        <div class="pad_top_2">
+                                            <div class="pad_bottom_1">❓ Opciones del campo:</div>
+                                            <div v-for="opcion, opcionIndex in bloque.opciones"
+                                                v-bind:key="'campo_' + bloqueIndex + '_opcion_' + opcionIndex">
+                                                <div class="flex_row pad_bottom_1">
+                                                    <div class="flex_100">
+                                                        <input class="supermini width_100"
+                                                            type="text"
+                                                            :value="opcion"
+                                                            v-on:input="v => changeOpcionBloque(bloqueIndex, opcionIndex, v)" />
+                                                    </div>
+                                                    <div class="flex_1 pad_left_1">
+                                                        <button class="supermini"
+                                                            v-on:click="() => removeOpcionBloque(bloqueIndex, opcionIndex)">❌</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <button class="supermini width_100"
+                                                    v-on:click="() => addOpcionBloque(bloqueIndex)">➕ Añadir opción</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
                                 <hr />
-                                <div v-if="['texto', 'párrafo', 'número', 'duración'].indexOf(bloque.tipo) !== -1">
+                                <div v-if="['texto', 'párrafo', 'número', 'duración', 'fecha'].indexOf(bloque.tipo) !== -1">
                                     <div class="pad_top_2">
                                         <div class="pad_bottom_1">❓ Texto de relleno del campo:</div>
-                                        <textarea class="supermini" v-on:input="(v) => setBloqueValue(bloqueIndex, 'relleno', v.target.value)" spellcheck="false" placeholder="Ej: Pepito de los Palotes" :value="bloque.relleno"></textarea>
+                                        <textarea class="supermini"
+                                            v-on:input="(v) => setBloqueValue(bloqueIndex, 'relleno', v.target.value)"
+                                            spellcheck="false"
+                                            placeholder="Ej: Pepito de los Palotes"
+                                            :value="bloque.relleno"></textarea>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div>
+                                    <div class="pad_top_2">
+                                        <div class="pad_bottom_1">❓ Condicional del campo:</div>
+                                        <textarea class="supermini"
+                                            v-on:input="(v) => setBloqueValue(bloqueIndex, 'condicional', v.target.value)"
+                                            spellcheck="false"
+                                            placeholder="Ej: formulario.es_hombre && (parseInt(formulario.edad) >= 18)"
+                                            :value="bloque.condicional"></textarea>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div>
+                                    <div class="pad_top_2">
+                                        <div class="pad_bottom_1">❓ Validador del campo:</div>
+                                        <textarea class="supermini"
+                                            v-on:input="(v) => setBloqueValue(bloqueIndex, 'validador', v.target.value)"
+                                            spellcheck="false"
+                                            placeholder="Ej: formulario.es_hombre && (parseInt(formulario.edad) >= 18)"
+                                            :value="bloque.validador"></textarea>
                                     </div>
                                 </div>
                             </template>
                             <template v-if="bloque.tipo === 'interludio'">
                                 <div class="pad_top_2">
                                     <div class="pad_bottom_1">❓ Contenido del interludio:</div>
-                                    <textarea class="supermini" v-on:input="(v) => setBloqueValue(bloqueIndex, 'interludio', v.target.value)" spellcheck="false" placeholder="Ej: # Sección 1\n\nExplicación de la sección." :value="bloque.interludio"></textarea>
+                                    <textarea class="supermini"
+                                        v-on:input="(v) => setBloqueValue(bloqueIndex, 'interludio', v.target.value)"
+                                        spellcheck="false"
+                                        placeholder="Ej: # Sección 1\n\nExplicación de la sección."
+                                        :value="bloque.interludio"></textarea>
                                 </div>
                             </template>
                         </div>
@@ -129,25 +216,28 @@
                     v-on:click="addBloqueToFormulario">➕</button>
             </div>
         </div>
-        <div class="pad_1" v-if="selectedEditorSubpage === 'codigo'">
-            <textarea
-                class="textarea_de_editor"
+        <div class="pad_1"
+            v-if="selectedEditorSubpage === 'codigo'">
+            <textarea class="textarea_de_editor"
                 :style="getEditorHeightForStyles()"
                 v-model="codigo_de_formulario"></textarea>
         </div>
     </template>
-    <div v-else-if="selectedPage === 'formulario'" class="color_white">
+    <div v-else-if="selectedPage === 'formulario'"
+        class="color_white">
         <div class="typical_title_1 flex_row centered">
             <div class="flex_100">
                 📋 Cumplimentación de formulario
             </div>
             <div class="flex_1">
-                <button class="supermini" v-on:click="() => selectPage('editor')">
+                <button class="supermini"
+                    v-on:click="() => selectPage('editor')">
                     <span>⬅️ 📐</span>
                 </button>
             </div>
             <div class="flex_1 pad_left_1">
-                <button class="supermini" v-on:click="() => selectPage('respuestas')">
+                <button class="supermini"
+                    v-on:click="() => selectPage('respuestas')">
                     <span>📸 ➡️</span>
                 </button>
             </div>
@@ -156,61 +246,100 @@
             <div class=""
                 v-for="formItem, formItemIndex in formulario"
                 v-bind:key="'form_item_' + formItemIndex">
-                <div class="pad_1 capa_de_interludio" v-if="formItem.tipo === 'interludio'">
-                    <lsw-markdown-viewer :source="formItem.interludio" :activate-ejs="true" />
-                </div>
-                <template v-else>
-                    <div class="pad_1 pad_bottom_0">
-                        <span v-if="(typeof respuestas[formItem.id] === 'undefined') || (respuestas[formItem.id] === '')"> ⚪️ {{ formItemIndex + 1 }}. {{ formItem.pregunta }} </span>
-                        <span v-else> 🟠 {{ formItemIndex + 1 }}. {{ formItem.pregunta }} </span>
-                        <span class="cursor_pointer" v-on:click="() => {toggleDescripcion(formItemIndex)}"> ℹ️ </span>
-                        <span class="descripcion_de_pregunta" v-if="descripciones_desplegadas.indexOf(formItemIndex) !== -1"> {{ formItem.descripcion }}</span>
+                <template v-if="evaluateCondicional(formItem)">
+                    <div class="pad_1 capa_de_interludio"
+                        v-if="formItem.tipo === 'interludio'">
+                        <lsw-markdown-viewer :source="formItem.interludio"
+                            :activate-ejs="true" />
                     </div>
-                    <div class="pad_1">
-                        <div class="" v-if="formItem.tipo === 'texto'">
-                            <input class="supermini width_100" type="text" v-model="respuestas[formItem.id]" spellcheck="false" />
+                    <template v-else>
+                        <div class="pad_1 pad_bottom_0">
+                            <span v-if="(typeof respuestas[formItem.id] === 'undefined') || (respuestas[formItem.id] === '')"> ⚪️ {{
+                                formItemIndex + 1 }}. {{ formItem.pregunta }} </span>
+                            <span v-else> 🟠 {{ formItemIndex + 1 }}. {{ formItem.pregunta }} </span>
+                            <span class="cursor_pointer"
+                                v-on:click="() => {toggleDescripcion(formItemIndex)}"> ℹ️ </span>
+                            <span class="descripcion_de_pregunta"
+                                v-if="descripciones_desplegadas.indexOf(formItemIndex) !== -1"> {{ formItem.descripcion }}</span>
                         </div>
-                        <div class="" v-else-if="formItem.tipo === 'párrafo'">
-                            <textarea class="supermini width_100" type="text" v-model="respuestas[formItem.id]" spellcheck="false"></textarea>
-                        </div>
-                        <div class="" v-else-if="formItem.tipo === 'número'">
-                            <input class="supermini width_100" type="number" v-model="respuestas[formItem.id]" spellcheck="false" />
-                        </div>
-                        <div class="" v-else-if="formItem.tipo === 'fecha'">
-                            <input class="supermini width_100" type="text" v-model="respuestas[formItem.id]" spellcheck="false" />
-                            <div class="pad_top_1">
-                                <lsw-calendario modo="date" :al-cambiar-valor="(v, comp) => propagateCalendarioValue(formItem, v, comp)" />
+                        <div class="pad_1">
+                            <div class=""
+                                v-if="formItem.tipo === 'texto'">
+                                <input class="supermini width_100"
+                                    type="text"
+                                    v-model="respuestas[formItem.id]"
+                                    spellcheck="false" />
+                            </div>
+                            <div class=""
+                                v-else-if="formItem.tipo === 'párrafo'">
+                                <textarea class="supermini width_100"
+                                    type="text"
+                                    v-model="respuestas[formItem.id]"
+                                    spellcheck="false"></textarea>
+                            </div>
+                            <div class=""
+                                v-else-if="formItem.tipo === 'número'">
+                                <input class="supermini width_100"
+                                    type="number"
+                                    v-model="respuestas[formItem.id]"
+                                    spellcheck="false" />
+                            </div>
+                            <div class=""
+                                v-else-if="formItem.tipo === 'fecha'">
+                                <input class="supermini width_100"
+                                    type="text"
+                                    v-model="respuestas[formItem.id]"
+                                    spellcheck="false" />
+                                <div class="pad_top_1">
+                                    <lsw-calendario modo="date"
+                                        :al-cambiar-valor="(v, comp) => propagateCalendarioValue(formItem, v, comp)" />
+                                </div>
+                            </div>
+                            <div class=""
+                                v-else-if="formItem.tipo === 'duración'">
+                                <input class="supermini width_100"
+                                    type="text"
+                                    v-model="respuestas[formItem.id]"
+                                    spellcheck="false" />
+                            </div>
+                            <div class=""
+                                v-else-if="formItem.tipo === 'opción'">
+                                <select class="supermini width_100" v-model="respuestas[formItem.id]">
+                                    <template v-for="opcion, opcionIndex in formItem.opciones">
+                                        <option v-bind:key="'bloque_' + formItemIndex + '_opcion_' + opcionIndex"
+                                            :value="opcion">{{ opcionIndex + 1 }}. {{ opcion }}</option>
+                                    </template>
+                                </select>
                             </div>
                         </div>
-                        <div class="" v-else-if="formItem.tipo === 'duración'">
-                            <input class="supermini width_100" type="text" v-model="respuestas[formItem.id]" spellcheck="false" />
-                        </div>
-                    </div>
+                    </template>
                 </template>
             </div>
         </div>
     </div>
-    <div v-else-if="selectedPage === 'respuestas'" class="color_white">
+    <div v-else-if="selectedPage === 'respuestas'"
+        class="color_white">
         <div class="typical_title_1 flex_row centered">
             <div class="flex_100">
                 📸 Respuestas de formulario
             </div>
             <div class="flex_1">
-                <button class="supermini" v-on:click="() => selectPage('formulario')">
+                <button class="supermini"
+                    v-on:click="() => selectPage('formulario')">
                     <span>⬅️ 📋</span>
                 </button>
             </div>
         </div>
         <div>
             <template v-for="formItem, formItemIndex in formulario">
-                <template v-if="formItem.id in respuestas">
+                <template v-if="(formItem.id in respuestas) && evaluateCondicional(formItem)">
                     <div class="pad_1"
                         v-bind:key="'respuesta_de_formulario_' + formItemIndex">
                         <hr />
                         <div class="pad_bottom_1">
                             <span>
                                 <b>{{ formItemIndex + 1 }}. {{ formItem.pregunta }}</b>
-                            </span>        
+                            </span>
                         </div>
                         <div class="">{{ respuestas[formItem.id] }}</div>
                     </div>

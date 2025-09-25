@@ -1,4 +1,4 @@
-/home/carlos/Escritorio/formulario-de-digitalizacion/src/lsw-framework/src/apis/lsw-ensurer/ensure.js
---> /home/carlos/Escritorio/formulario-de-digitalizacion/src-instrumented/lsw-framework/src/apis/lsw-ensurer/ensure.instr.js
-/home/carlos/Escritorio/formulario-de-digitalizacion/src/lsw-framework/src/apis/lsw-dom/lsw-vue2.js
---> /home/carlos/Escritorio/formulario-de-digitalizacion/src-instrumented/lsw-framework/src/apis/lsw-dom/lsw-vue2.instr.js
+/home/carlos/Escritorio/form-sharer/src/lsw-framework/src/apis/lsw-ensurer/ensure.js
+--> /home/carlos/Escritorio/form-sharer/src-instrumented/lsw-framework/src/apis/lsw-ensurer/ensure.instr.js
+/home/carlos/Escritorio/form-sharer/src/lsw-framework/src/apis/lsw-dom/lsw-vue2.js
+--> /home/carlos/Escritorio/form-sharer/src-instrumented/lsw-framework/src/apis/lsw-dom/lsw-vue2.instr.js
