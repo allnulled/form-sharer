@@ -16,18 +16,7 @@
         isMounted: false,
         selectedPage: "editor", // also: "editor", "formulario", "respuestas"
         selectedEditorSubpage: "constructor", // also: "codigo", "constructor"
-        formulario: [{
-          id: "n1",
-          pregunta: "n1",
-          descripcion: "",
-          requerido: false,
-          tipo: "opciones",
-          relleno: "",
-          condicional: "if(false) {return false;}\nreturn true",
-          validador: "if(false) throw new Error('Validación no cumplida')",
-          interludio: null,
-          opciones: ["Opción 1", "Opción 2"],
-        }] || [],
+        formulario: [],
         codigo_de_formulario: "",
         campos_escondidos: [],
         descripciones_desplegadas: [],
