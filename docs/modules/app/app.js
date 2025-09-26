@@ -16,7 +16,18 @@
         isMounted: false,
         selectedPage: "editor", // also: "editor", "formulario", "respuestas"
         selectedEditorSubpage: "constructor", // also: "codigo", "constructor"
-        formulario: [],
+        formulario: [{
+          id: "n1",
+          pregunta: "n1",
+          descripcion: "",
+          requerido: false,
+          tipo: "opciones",
+          relleno: "",
+          condicional: "if(false) {return false;}\nreturn true",
+          validador: "if(false) throw new Error('Validación no cumplida')",
+          interludio: null,
+          opciones: ["Opción 1", "Opción 2"],
+        }] || [],
         codigo_de_formulario: "",
         campos_escondidos: [],
         descripciones_desplegadas: [],
@@ -81,16 +92,19 @@
         this.$trace("App.methods.addOpcionBloque");
         this.formulario[bloqueIndex].opciones.push("");
         this.formulario[bloqueIndex] = Object.assign({}, this.formulario[bloqueIndex]);
+        this.$forceUpdate(true);
       },
       changeOpcionBloque(bloqueIndex, opcionIndex, event) {
         this.$trace("App.methods.changeOpcionBloque");
         this.formulario[bloqueIndex].opciones[opcionIndex] = event.target.value;
         this.formulario[bloqueIndex] = Object.assign({}, this.formulario[bloqueIndex]);
+        this.$forceUpdate(true);
       },
       removeOpcionBloque(bloqueIndex, opcionIndex) {
         this.$trace("App.methods.removeOpcionBloque");
         this.formulario[bloqueIndex].opciones.splice(opcionIndex, 1);
         this.formulario[bloqueIndex] = Object.assign({}, this.formulario[bloqueIndex]);
+        this.$forceUpdate(true);
       },
       removeBloqueFromFormulario(bloqueIndex) {
         this.$trace("App.methods.removeBloqueFromFormulario");
@@ -109,6 +123,19 @@
         const datestring = LswTimer.utils.fromDateToDatestring(value, true);
         this.respuestas[formItem.id] = datestring;
         component.$el.parentElement.previousElementSibling.value = datestring;
+        this.$forceUpdate(true);
+      },
+      propagateOpcionesValue(formItem, value, component) {
+        this.$trace("App.methods.propagateOpcionesValue");
+        if(!this.respuestas[formItem.id]) {
+          this.respuestas[formItem.id] = [];
+        }
+        const pos = this.respuestas[formItem.id].indexOf(value);
+        if(pos === -1) {
+          this.respuestas[formItem.id].push(value);
+        } else {
+          this.respuestas[formItem.id].splice(pos, 1);
+        }
         this.$forceUpdate(true);
       },
       ensureAllIdsExistAndAreUnique() {

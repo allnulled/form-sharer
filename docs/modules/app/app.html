@@ -311,6 +311,17 @@
                                     </template>
                                 </select>
                             </div>
+                            <div class=""
+                                v-else-if="formItem.tipo === 'opciones'">
+                                <template v-for="opcion, opcionIndex in formItem.opciones">
+                                    <label v-bind:key="'bloque_' + formItemIndex + '_opcion_' + opcionIndex">
+                                        <input type="checkbox"
+                                            :value="Array.isArray(respuestas[formItem.id]) && (respuestas[formItem.id].indexOf(opcion) !== -1)"
+                                            v-on:click="() => propagateOpcionesValue(formItem, opcion, this)"/>
+                                            <span style="margin-top: -2px;">{{ opcionIndex + 1 }}. {{ opcion }}</span>
+                                    </label>
+                                </template>
+                            </div>
                         </div>
                     </template>
                 </template>
@@ -341,7 +352,10 @@
                                 <b>{{ formItemIndex + 1 }}. {{ formItem.pregunta }}</b>
                             </span>
                         </div>
-                        <div class="">{{ respuestas[formItem.id] }}</div>
+                        <div>
+                            <span class="" v-if="typeof respuestas[formItem.id] === 'string'"><b>Respuesta: </b> {{ respuestas[formItem.id] }}</span>
+                            <span class="" v-else-if="Array.isArray(respuestas[formItem.id])"><b>Respuestas: </b>{{ respuestas[formItem.id].join(", ") }}</span>
+                        </div>
                     </div>
                 </template>
             </template>
